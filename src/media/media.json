@@ -28,6 +28,30 @@
     "imdbID": "tt012073723423",
     "Type": "movie",
     "Poster": "https://res.cloudinary.com/dgli1cavd/image/upload/v1622205164/filmPosters/zstikt8xldtiitkppmrn.jpg",
-    "Reviews": []
+    "Reviews": [
+      {
+        "comment": "A good book but definitely I don't like many parts of the plot",
+        "rate": 3,
+        "elementId": "tt012073723423",
+        "_id": "cu07b9wkp8guipt",
+        "createdOn": "2021-05-28T15:14:27.520Z"
+      }
+    ]
+  },
+  {
+    "Title": "Tarzan",
+    "Year": "2001",
+    "imdbID": "tt01207372342sdgfsfdg3",
+    "Type": "movie",
+    "Poster": "https://res.cloudinary.com/dgli1cavd/image/upload/v1622214960/filmPosters/iibknei8dufq2aja7tpo.jpg",
+    "Reviews": [
+      {
+        "comment": "A good book but definitely I don't like many parts of the plot",
+        "rate": 3,
+        "elementId": "tt012073723423",
+        "_id": "cu07b9wkp8guipt",
+        "createdOn": "2021-05-28T15:14:27.520Z"
+      }
+    ]
   }
 ]

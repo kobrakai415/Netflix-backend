@@ -4,15 +4,8 @@ import listEndpoints from "express-list-endpoints"
 import {badRequestErrorHandler, notFoundErrorHandler, forbiddenErrorHandler, catchAllErrorHandler} from "../src/helpers/errorHandlers.js"
 import mediaRoutes from "./media/media.js"
 
-// cloudinary.config({
-//     cloud_name: "dgli1cavd",
-//     api_key: "993934628452523",
-//     api_secret: "5ZSOTKcaTMZFYiu57fCpq5YUDQg",
-// });
-
 const server = express()
 const port = process.env.PORT || 3001
-console.log(process.env.CLOUDINARY_URL)
 
 const whitelist = [process.env.FRONTEND_LOCAL_URL, process.env.FRONTEND_CLOUD_URL]
 
@@ -23,7 +16,7 @@ const corsOptions = {
 }
 
 server.use(express.json())
-// server.use(cors())
+server.use(cors(corsOptions))
 
 server.use("/media", mediaRoutes)
 
