@@ -3,14 +3,17 @@ import cors from "cors"
 import listEndpoints from "express-list-endpoints"
 import {badRequestErrorHandler, notFoundErrorHandler, forbiddenErrorHandler, catchAllErrorHandler} from "../src/helpers/errorHandlers.js"
 import mediaRoutes from "./media/media.js"
+import dotenv from "dotenv"
 
 const server = express()
 const port = process.env.PORT || 3001
 
-const whitelist = [process.env.FRONTEND_LOCAL_URL, process.env.FRONTEND_CLOUD_URL]
+const whitelist = [process.env.FRONTEND_DEV_URL, process.env.FRONTEND_CLOUD_URL]
 
 const corsOptions = {
     origin: function(origin, next) {
+        console.log(origin)
+        console.log(process.env.FRONTEND_DEV_URL)
         whitelist.indexOf(origin) !== -1 ? next(null, true) : new Error ("Cors problem")
     }
 }
