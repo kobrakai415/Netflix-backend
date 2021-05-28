@@ -18,7 +18,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
     const media = await getMedia()
 
-    const film = media.findIndex(film => film.imdbID === req.params.id)
+    const film = media.find(film => film.imdbID === req.params.id)
 
     film ? res.send(film) : next(new Error ("Incorrect ID, no movies found"))
 
