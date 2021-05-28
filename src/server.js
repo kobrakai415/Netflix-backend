@@ -3,8 +3,8 @@ import cors from "cors"
 import listEndpoints from "express-list-endpoints"
 import {badRequestErrorHandler, notFoundErrorHandler, forbiddenErrorHandler, catchAllErrorHandler} from "../src/helpers/errorHandlers.js"
 import mediaRoutes from "./media/media.js"
-// import dotenv from 'dotenv'
-// import {v2 as cloudinary} from "cloudinary"
+import dotenv from 'dotenv'
+import {v2 as cloudinary} from "cloudinary"
 
 // cloudinary.config({
 //     cloud_name: "dgli1cavd",

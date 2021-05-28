@@ -4,7 +4,7 @@ import { getMedia, writeMedia } from "../helpers/files.js"
 import multer from "multer"
 import { v2 as cloudinary } from "cloudinary"
 import { CloudinaryStorage } from "multer-storage-cloudinary"
-
+import uniqid from "uniqid"
 const router = express.Router()
 
 
@@ -18,9 +18,18 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
     const media = await getMedia()
 
-    const film = media.find(film => film.imdbID === req.params.id)
+    const film = media.findIndex(film => film.imdbID === req.params.id)
 
     film ? res.send(film) : next(new Error ("Incorrect ID, no movies found"))
+
+    // try {
+    //     let response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=06749b45454775d74e6ecb748ff27029&with_genres=27`)
+    //     let data = await response.json()
+    //     console.log(data)
+    // }
+    // catch (error) {
+    //     console.log(error)
+    // }
 
 })
 
@@ -97,7 +106,39 @@ router.post("/:id/uploadPoster", upload, async (req, res, next) => {
     }   
 })
 
-router.post("/:id/review")
+router.post("/:id/review", async (req, res, next) => {
+    try {
+        const media = await getMedia()
+        const film = media.find(film => film.imdbID === req.params.id)
+
+        const review = {...req.body, _id: uniqid(), createdOn: new Date(), elementId: film.imdbID}
+
+        film.Reviews.push(review)
+        
+        // media[film].Reviews.push(review)
+        await writeMedia(media)
+        res.send("success")
+
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.delete("/:id/review/:reviewId", async (req, res, next) => {
+    try {
+        const media = await getMedia()
+        const film = media.find(film => film.imdbID === req.params.id)
+
+        const reviewIndex = film.Reviews.findIndex(review => review._id === req.params.reviewId)
+        film.Reviews.splice(reviewIndex, 1)
+
+        await writeMedia(media)
+        res.send("success")
+
+    } catch (error) {
+        next(error)
+    }
+})
 
 
 export default router 
